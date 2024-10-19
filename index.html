@@ -14,6 +14,7 @@
         <img src="logo.png" alt="Logo" class="w-48 h-48 mx-auto mb-6">
         <form action="#" method="POST">
 
+            <!-- Personal Information Section -->
             <div class="mb-4 border-2 border-pink-300 rounded-lg p-3">
                 <h3 class="text-2xl mb-6 text-pink-400">Informações pessoais</h3>
                 <div class="mb-4">
@@ -23,7 +24,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700">Email</label>
+                    <label for="email" class="block text-gray-700">E-mail</label>
                     <input type="email" id="email" name="email" placeholder="Informe seu email..."
                         class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
@@ -53,11 +54,13 @@
                 </div>
             </div>
 
+            <!-- Pet Information Section -->
             <div class="mb-4 border-2 border-pink-300 rounded-lg p-3">
                 <h3 class="text-2xl mb-6 text-pink-400">Informações do Pet</h3>
                 <div class="mb-4">
                     <label for="num-pets" class="block text-gray-700">Número de Pets</label>
-                    <select id="num-pets" name="num-pets" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="num-pets" name="num-pets"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -65,6 +68,10 @@
                         <option value="5">5</option>
                     </select>
                 </div>
+
+                <div class="border-b border-pink-400 m-2"></div>
+
+                <!-- Dynamic Pet Information Section -->
                 <div id="pets-info">
                     <div class="mb-4 flex items-center">
                         <div class="w-3/4 mr-2">
@@ -78,18 +85,47 @@
                                 class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
-                    <div class="mb-4">
-                        <div class="flex items-center">
-                            <label for="pet-castrado-1" class="text-gray-700 mr-6">O pet é castrado?</label>
 
-                            <input type="checkbox" id="pet-castrado-sim-1" name="pet-castrado-1" value="sim" class="mr-1">
-                            <label for="pet-castrado-sim-1" class="text-gray-700 mr-4">Sim</label>
+                    <div class="mb-4 flex items-center">
+                        <input type="checkbox" id="pet-castrado-sim-1" name="pet-castrado-1" value="sim" class="mr-2">
+                        <label for="pet-castrado-sim-1" class="text-gray-700 mr-3">Sim</label>
 
-                            <input type="checkbox" id="pet-castrado-nao-1" name="pet-castrado-1" value="nao" class="mr-1">
-                            <label for="pet-castrado-nao-1" class="text-gray-700">Não</label>
-                        </div>
+                        <input type="checkbox" id="pet-castrado-nao-1" name="pet-castrado-1" value="nao" class="mr-2">
+                        <label for="pet-castrado-nao-1" class="text-gray-700 mr-3">Não</label>
+
+                        <label for="pet-castrado-1" class="text-gray-700">| O pet é castrado?</label>
                     </div>
+
+                    <div class="mb-4 flex items-center">
+                        <input type="checkbox" id="pet-vacinas-sim-1" name="pet-vacinas-1" value="sim" class="mr-2">
+                        <label for="pet-vacinas-sim-1" class="text-gray-700 mr-3">Sim</label>
+
+                        <input type="checkbox" id="pet-vacinas-nao-1" name="pet-vacinas-1" value="nao" class="mr-2">
+                        <label for="pet-vacinas-nao-1" class="text-gray-700 mr-3">Não</label>
+
+                        <label for="pet-vacinas-1" class="text-gray-700">| O pet é vacinado?</label>
+                    </div>
+
+                    <div class="mb-4 flex items-center">
+                        <input type="checkbox" id="pet-remedio-sim-1" name="pet-remedio-1" value="sim" class="mr-2">
+                        <label for="pet-remedio-sim-1" class="text-gray-700 mr-3">Sim</label>
+
+                        <input type="checkbox" id="pet-remedio-nao-1" name="pet-remedio-1" value="nao" class="mr-2">
+                        <label for="pet-remedio-nao-1" class="text-gray-700 mr-3">Não</label>
+
+                        <label for="pet-remedio-1" class="text-gray-700">| O pet toma remédio?</label>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="pet-obs-1" class="block text-gray-700">Observações</label>
+                        <textarea id="pet-obs-1" name="pet-obs-1"
+                            placeholder="Informe alguma observação sobre o pet, caso tome remédio informe o nome aqui..."
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"></textarea>
+                    </div>
+
+                    <div class="border-b border-pink-400 m-2"></div>
                 </div>
+            </div>
 
             <button type="submit"
                 class="w-full bg-pink-400 text-white py-2 rounded-lg hover:bg-pink-600">Enviar</button>
@@ -97,6 +133,7 @@
     </div>
 
     <script>
+        // Event listener to dynamically update pet information fields based on the number of pets selected
         document.getElementById('num-pets').addEventListener('change', function () {
             const numPets = parseInt(this.value);
             const petsInfo = document.getElementById('pets-info');
@@ -104,18 +141,58 @@
 
             for (let i = 1; i <= numPets; i++) {
                 const petDiv = document.createElement('div');
-                petDiv.className = 'mb-4 flex items-center';
+                petDiv.className = 'mb-4';
                 petDiv.innerHTML = `
-                    <div class="w-3/4 mr-2">
-                        <label for="pet-name-${i}" class="block text-gray-700">Nome do Pet ${i}</label>
-                        <input type="text" id="pet-name-${i}" name="pet-name-${i}" placeholder="Informe o nome do pet..."
-                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <div class="mb-4 flex items-center">
+                        <div class="w-3/4 mr-2">
+                            <label for="pet-name-${i}" class="block text-gray-700">Nome do Pet ${i}</label>
+                            <input type="text" id="pet-name-${i}" name="pet-name-${i}" placeholder="Informe o nome do pet..."
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="w-1/4">
+                            <label for="pet-age-${i}" class="block text-gray-700">Idade</label>
+                            <input type="number" id="pet-age-${i}" name="pet-age-${i}" placeholder="Idade"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
                     </div>
-                    <div class="w-1/4">
-                        <label for="pet-age-${i}" class="block text-gray-700">Idade</label>
-                        <input type="number" id="pet-age-${i}" name="pet-age-${i}" placeholder="Idade"
-                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        
+                    <div class="mb-4 flex items-center">
+                        <input type="checkbox" id="pet-castrado-sim-${i}" name="pet-castrado-${i}" value="sim" class="mr-2">
+                        <label for="pet-castrado-sim-${i}" class="text-gray-700 mr-3">Sim</label>
+        
+                        <input type="checkbox" id="pet-castrado-nao-${i}" name="pet-castrado-${i}" value="nao" class="mr-2">
+                        <label for="pet-castrado-nao-${i}" class="text-gray-700 mr-3">Não</label>
+        
+                        <label for="pet-castrado-${i}" class="text-gray-700">| O pet é castrado?</label>
                     </div>
+        
+                    <div class="mb-4 flex items-center">
+                        <input type="checkbox" id="pet-vacinas-sim-${i}" name="pet-vacinas-${i}" value="sim" class="mr-2">
+                        <label for="pet-vacinas-sim-${i}" class="text-gray-700 mr-3">Sim</label>
+        
+                        <input type="checkbox" id="pet-vacinas-nao-${i}" name="pet-vacinas-${i}" value="nao" class="mr-2">
+                        <label for="pet-vacinas-nao-${i}" class="text-gray-700 mr-3">Não</label>
+        
+                        <label for="pet-vacinas-${i}" class="text-gray-700">| O pet é vacinado?</label>
+                    </div>
+        
+                    <div class="mb-4 flex items-center">
+                        <input type="checkbox" id="pet-remedio-sim-${i}" name="pet-remedio-${i}" value="sim" class="mr-2">
+                        <label for="pet-remedio-sim-${i}" class="text-gray-700 mr-3">Sim</label>
+        
+                        <input type="checkbox" id="pet-remedio-nao-${i}" name="pet-remedio-${i}" value="nao" class="mr-2">
+                        <label for="pet-remedio-nao-${i}" class="text-gray-700 mr-3">Não</label>
+        
+                        <label for="pet-remedio-${i}" class="text-gray-700">| O pet toma remédio?</label>
+                    </div>
+        
+                    <div class="mb-4">
+                        <label for="pet-obs-${i}" class="block text-gray-700">Observações</label>
+                        <textarea id="pet-obs-${i}" name="pet-obs-${i}" placeholder="Informe alguma observação sobre o pet, caso tome remédio informe o nome aqui..."
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"></textarea>
+                    </div>
+        
+                    <div class="border-b border-pink-400 m-2"></div>
                 `;
                 petsInfo.appendChild(petDiv);
             }
